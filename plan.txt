@@ -1,0 +1,9 @@
+Would like to attempt doing it in Julia.
+
+Start with basic MLP.
+
+RNN probably a good idea.
+
+Neural ODE probably too computationally intensive (haven't figured out my CUDNN install problems)
+
+I usually use Pytorch, but I might want to try Tensorflow. Starting with pytorch tho
