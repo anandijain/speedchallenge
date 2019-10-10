@@ -1,3 +1,13 @@
+-------
+
+plan:
+	* first need to build io.
+		-read files into arrays for the neural network
+	* build a 'dataloader' to get x,y tuples (image, speed)
+	* build various nn models and test
+	* possibly try a pretrained model
+
+-------
 Would like to attempt doing it in Julia.
 
 Start with basic MLP.
