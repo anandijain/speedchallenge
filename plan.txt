@@ -7,6 +7,10 @@ plan:
 	* build various nn models and test
 	* possibly try a pretrained model
 
+
+wants:
+	* full runs on gpu
+	
 -------
 Would like to attempt doing it in Julia.
 

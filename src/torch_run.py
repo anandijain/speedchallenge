@@ -6,15 +6,16 @@ import torchvision as tv
 import numpy as np
 
 import utils as u
-
-FRAME_LEN = 512
-TRAIN_FN = './data/train.mp4'
-TEST_FN = './data/test.mp4'
-LABELS_FN = './data/train.txt'
+import dsutils as ds
+import macros as m
 
 def read_video(start_frame, stop_frame):
-  vid = tv.io.read_video(TRAIN_FN, start_pts=FRAME_LEN*start_frame, end_pts=FRAME_LEN*stop_frame)
+  vid = tv.io.read_video(m.TRAIN_FN, start_pts=m.FRAME_LEN*start_frame, end_pts=m.FRAME_LEN*stop_frame)
   return vid
+
+def read_timestamps():
+	timestamps = tv.io.read_video_timestamps(m.TRAIN_FN)
+	return timestamps
 
 class Frames(torch.utils.data.Dataset):
 	def __init__(self):
@@ -31,7 +32,7 @@ class Frames(torch.utils.data.Dataset):
 	def __len__(self):
 		return self.num_frames
 
-class Net(nn.Module):
+class MLP(nn.Module):
 	def __init__(self, input_size, hidden_size, output_size):
 		super(Net, self).__init__()
 		self.l1 = nn.Linear(input_size, hidden_size)
@@ -52,8 +53,9 @@ if __name__ == '__main__':
 
 	log_interval = 1
 
-	net = Net(input_size, hidden_size, output_size)
-
+	# net = Net(input_size, hidden_size, output_size)
+	net = ds.auto.mlp.MLP(input_size, output_size, factor=1000, classify=False)
+	print(net)
 	train_set = Frames()
 	train_loader = torch.utils.data.DataLoader(dataset=train_set, batch_size=batch_size, shuffle=False)
 
