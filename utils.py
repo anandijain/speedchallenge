@@ -1,10 +1,8 @@
 import os
 import time
+
 import cv2
 import numpy as np
-
-import torch
-import torchvision as tv
 
 # import matplotlib.pyplot as plt
 import pandas as pd
@@ -14,9 +12,7 @@ TRAIN_FN = './data/train.mp4'
 TEST_FN = './data/test.mp4'
 LABELS_FN = './data/train.txt'
 
-def read_video(start_frame, stop_frame):
-  vid = tv.io.read_video(TRAIN_FN, start_pts=FRAME_LEN*start_frame, end_pts=FRAME_LEN*stop_frame)
-  return vid
+
 
 def frame_speeds():
   df = pd.read_csv(LABELS_FN, sep='\n', header=None)

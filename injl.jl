@@ -68,6 +68,7 @@ tups = make_tups(vid, speeds)
 
 ps = Flux.params(m)
 loss(tups[1]...)
+plot(tups[1][1])
 
 opt = ADAM()
 num_tups = length(tups)
@@ -75,10 +76,9 @@ num_tups = length(tups)
 function evalcb()
 	test_x, test_y = tups[rand(1:num_tups)]
 	img = view(Gray.(test_x), :)
-	plot(test_x)
+	plot!(test_x)
 	@show(loss(test_x, test_y))
 	@show(m(img), test_y)
 end
-
 Flux.train!(loss, ps, tups, opt, cb = Flux.throttle(evalcb, 5))
 # run()
